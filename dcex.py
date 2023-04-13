@@ -60,6 +60,18 @@ async def play(ctx: commands.Context, *, search: str) -> None:
     else:
         await vc.queue.put_wait(track)
 
+@bot.command()
+async def playyt(ctx: commands.Context, *, search: str) -> None:
+    """Simple play command."""
+
+    if not ctx.voice_client:
+        vc: wavelink.Player = await ctx.author.voice.channel.connect(cls=wavelink.Player)
+    else:
+        vc: wavelink.Player = ctx.voice_client
+
+    track = await wavelink.YouTubeTrack.search(search, return_first=True)
+    await vc.play(track)
+
 
 @bot.command()
 async def disconnect(ctx: commands.Context) -> None:
