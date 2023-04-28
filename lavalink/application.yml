@@ -12,8 +12,8 @@ plugins:
       deezer: false # Enable Deezer source
       yandexmusic: false # Enable Yandex Music source
     spotify:
-      clientId: "ID_CLIENT"
-      clientSecret: "SECRET_CLIENT"
+      clientId: ${env:SPOTIFY_CLIENT_ID}
+      clientSecret: ${env:SPOTIFY_CLIENT_SECRET}
       countryCode: "US" # the country code you want to use for filtering the artists top tracks. See https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
       playlistLoadLimit: 6 # The number of pages at 100 tracks each
       albumLoadLimit: 6 # The number of pages at 50 tracks each
