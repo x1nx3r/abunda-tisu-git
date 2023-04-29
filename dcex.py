@@ -34,6 +34,9 @@ class Bot(commands.Bot):
 
 bot = Bot()
 
+##
+#A fancy ping command
+##
 @bot.command()
 async def ping(ctx):
     if round(bot.latency * 1000) <= 50:
@@ -46,6 +49,11 @@ async def ping(ctx):
         embed=discord.Embed(title="PING", description=f":ping_pong: Pingpingpingpingping! The ping is **{round(bot.latency *1000)}** milliseconds!", color=0x990000)
     await ctx.send(embed=embed)
 
+
+##
+#  this is a play command, 
+# User prompts a command >> fetch spotify api track info >> get the song name and input it to play so it searches and plays from youtube.
+##
 @bot.command()
 async def play(ctx: commands.Context, *, search: str) -> None:
     """Simple play command."""
