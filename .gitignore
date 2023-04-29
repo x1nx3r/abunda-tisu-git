@@ -3,4 +3,5 @@ tokens.env
 lavalink/tokens.env
 .cache
 __pycache__
+lavalink/logs
 #plans and to-do lists
