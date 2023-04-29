@@ -1,4 +1,6 @@
 #ignoring the tokens
 tokens.env
-
+lavalink/tokens.env
+.cache
+__pycache__
 #plans and to-do lists

@@ -1,0 +1,12 @@
+
+
+
+What i plan this bot to act is 
+
+a. having the functionality to play spotify songs
+	
+	of course because the nature of spotify API not providing player functionality the plan is to :
+	User prompts a command >> fetch spotify api track info >> get the song name and input it to play so it searches and plays from youtube.
+
+
+

@@ -1,8 +1,12 @@
 import discord
 import wavelink
+import os
+import def_func
+from dotenv import load_dotenv
 from discord.ext import commands
 from wavelink.ext import spotify
 
+load_dotenv('tokens.env')
 
 class Bot(commands.Bot):
 
@@ -44,35 +48,6 @@ async def ping(ctx):
 
 @bot.command()
 async def play(ctx: commands.Context, *, search: str) -> None:
-    """Simple play command that accepts a Spotify song URL.
-    This command enables AutoPlay. AutoPlay finds songs automatically when used with Spotify.
-    Tracks added to the Queue will be played in front (Before) of those added by AutoPlay.
-    """
-
-    if not ctx.voice_client:
-        vc: wavelink.Player = await ctx.author.voice.channel.connect(cls=wavelink.Player)
-    else:
-        vc: wavelink.Player = ctx.voice_client
-
-    # Check the search to see if it matches a valid Spotify URL...
-    decoded = spotify.decode_url(search)
-    if not decoded or decoded['type'] is not spotify.SpotifySearchType.track:
-        await ctx.send('Only Spotify Track URLs are valid.')
-        return
-
-    # Set autoplay to True. This can be disabled at anytime...
-    vc.autoplay = True
-    track = await spotify.SpotifyTrack.search(search)
-
-    # IF the player is not playing immediately play the song...
-    # otherwise put it in the queue...
-    if not vc.is_playing():
-        await vc.play(track, populate=True)
-    else:
-        await vc.queue.put_wait(track)
-
-@bot.command()
-async def playyt(ctx: commands.Context, *, search: str) -> None:
     """Simple play command."""
 
     if not ctx.voice_client:
@@ -80,7 +55,10 @@ async def playyt(ctx: commands.Context, *, search: str) -> None:
     else:
         vc: wavelink.Player = ctx.voice_client
 
-    track = await wavelink.YouTubeTrack.search(search, return_first=True)
+    info = await def_func.get_track_info(search)
+
+    track = await wavelink.YouTubeTrack.search(info[0], return_first=True)
+    await ctx.send(f'Now playing: {info[0]} by {info[1]} from the album {info[2]}')
     await vc.play(track)
 
 
@@ -92,5 +70,5 @@ async def disconnect(ctx: commands.Context) -> None:
     vc: wavelink.Player = ctx.voice_client
     await vc.disconnect()
 
-
-bot.run('TOKEN')
+token=os.getenv('DISCORD_TOKEN')
+bot.run(token)
