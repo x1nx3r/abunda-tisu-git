@@ -1,7 +1,16 @@
-#ignoring the tokens
+# secrets
+.env
 tokens.env
 lavalink/tokens.env
-.cache
-__pycache__
-lavalink/logs
-#plans and to-do lists
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+.cache/
+.pytest_cache/
+
+# lavalink runtime
+lavalink/*.jar
+lavalink/logs/
+lavalink/plugins/
