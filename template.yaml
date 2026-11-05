@@ -2,7 +2,7 @@ apiVersion: manus-dei/v2
 name: abunda-tisu-git
 environment:
   profile: python
-  version: "upstream-ff5d7703ef"
+  version: "local-20261105-015804"
 workspace: template
 opencode:
   mode: connect
